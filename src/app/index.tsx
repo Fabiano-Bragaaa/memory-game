@@ -1,9 +1,14 @@
-import { Text, View } from "react-native";
+import { router } from "expo-router";
+import { Text, TouchableOpacity } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
   return (
-    <View>
+    <SafeAreaView>
       <Text>Hello World</Text>
-    </View>
+      <TouchableOpacity onPress={() => router.push("/(private)/game")}>
+        <Text>game</Text>
+      </TouchableOpacity>
+    </SafeAreaView>
   );
 }
