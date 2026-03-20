@@ -1,8 +1,9 @@
 import { images } from "@/assets";
 import { GradientButton } from "@/components/gradient-button";
 import { Page } from "@/components/page";
+import { TextInput } from "@/components/text-input";
 import { colors } from "@/theme/colors";
-import { Image, StyleSheet, Text, TextInput, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 
 export default function Login() {
   return (
@@ -18,7 +19,7 @@ export default function Login() {
           </Text>
         </View>
         <View style={styles.formContainer}>
-          <TextInput />
+          <TextInput placeholder="Digite seu nome" autoCapitalize="words" returnKeyType="done" />
           <GradientButton label="Entrar" onPress={() => {}} />
         </View>
       </View>
