@@ -1,3 +1,4 @@
+import { usePressAnimation } from "@/animations";
 import { colors, gradients } from "@/theme/colors";
 import { LinearGradient } from "expo-linear-gradient";
 import {
@@ -7,6 +8,7 @@ import {
   TouchableOpacityProps,
   View,
 } from "react-native";
+import Animated from "react-native-reanimated";
 
 type GradientButtonProps = TouchableOpacityProps & {
   label: string;
@@ -16,17 +18,24 @@ export function GradientButton({
   label,
   ...touchableOpacityProps
 }: GradientButtonProps) {
+  const { handlePressIn, handlePressOut, animatedStyle } = usePressAnimation();
   return (
     <View style={styles.buttonGlow}>
-      <LinearGradient
-        colors={gradients.colorful}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 2 }}
-        style={styles.buttonGradient}>
-        <TouchableOpacity style={styles.button} {...touchableOpacityProps}>
-          <Text style={styles.buttonText}>{label}</Text>
-        </TouchableOpacity>
-      </LinearGradient>
+      <Animated.View style={animatedStyle}>
+        <LinearGradient
+          colors={gradients.colorful}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 2 }}
+          style={styles.buttonGradient}>
+          <TouchableOpacity
+            style={styles.button}
+            {...touchableOpacityProps}
+            onPressIn={handlePressIn}
+            onPressOut={handlePressOut}>
+            <Text style={styles.buttonText}>{label}</Text>
+          </TouchableOpacity>
+        </LinearGradient>
+      </Animated.View>
     </View>
   );
 }
