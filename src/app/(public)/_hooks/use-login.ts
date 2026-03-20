@@ -7,6 +7,14 @@ export function useLogin() {
   const [name, setName] = useState("");
 
   function handleLogin() {
+    if (!name.trim()) {
+      return;
+    }
+
+    if (!name.length) {
+      return;
+    }
+
     setUser(name);
     router.replace("/(private)/home");
   }
