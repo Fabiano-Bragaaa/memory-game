@@ -37,7 +37,17 @@ export const colors = {
   },
 };
 
-export const gradients = {
+type Gradient = [string, string, ...string[]];
+
+export const gradients: {
+  primary: Gradient;
+  card: Gradient;
+  colorful: Gradient;
+  neutral: Gradient;
+  cyanDark: Gradient;
+  blueDark: Gradient;
+  purpleDark: Gradient;
+} = {
   primary: ["#BF5AF2", "#0A84FF"],
   card: ["#12122B", "#23233D", "#12122B"],
   colorful: ["#AA2AF4", "#6121EB", "#1DBA95"],
