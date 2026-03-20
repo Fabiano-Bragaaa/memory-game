@@ -1,7 +1,5 @@
 import { images } from "@/assets";
-import { GradientButton } from "@/components/gradient-button";
-import { Page } from "@/components/page";
-import { TextInput } from "@/components/text-input";
+import { GradientButton, Page, TextInput } from "@/components";
 import { colors } from "@/theme/colors";
 import { Image, StyleSheet, Text, View } from "react-native";
 
