@@ -2,12 +2,28 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { AuthStorageType } from "./auth-type";
+
+function generateUserId() {
+  if (globalThis.crypto?.randomUUID) {
+    return globalThis.crypto.randomUUID();
+  }
+
+  return `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+}
+
 const useAuthStore = create<AuthStorageType>()(
   persist(
     set => ({
       user: null,
       logout: () => set({ user: null }),
-      setUser: name => {},
+      setUser: name =>
+        set({
+          user: {
+            id: generateUserId(),
+            name,
+            createdAt: new Date().toISOString(),
+          },
+        }),
     }),
     {
       name: "auth",
