@@ -2,8 +2,10 @@ import { images } from "@/assets";
 import { GradientButton, Page, TextInput } from "@/components";
 import { colors } from "@/theme/colors";
 import { Image, StyleSheet, Text, View } from "react-native";
+import { useLogin } from "./_hooks/use-login";
 
 export default function Login() {
+  const { name, setName, handleLogin } = useLogin();
   return (
     <Page>
       <View style={styles.content}>
@@ -17,8 +19,14 @@ export default function Login() {
           </Text>
         </View>
         <View style={styles.formContainer}>
-          <TextInput placeholder="Digite seu nome" autoCapitalize="words" returnKeyType="done" />
-          <GradientButton label="Entrar" onPress={() => {}} />
+          <TextInput
+            placeholder="Digite seu nome"
+            autoCapitalize="words"
+            returnKeyType="done"
+            value={name}
+            onChangeText={setName}
+          />
+          <GradientButton label="Entrar" onPress={handleLogin} />
         </View>
       </View>
     </Page>
