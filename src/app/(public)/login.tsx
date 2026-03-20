@@ -1,14 +1,8 @@
 import { images } from "@/assets";
+import { GradientButton } from "@/components/gradient-button";
 import { Page } from "@/components/page";
 import { colors } from "@/theme/colors";
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Image, StyleSheet, Text, TextInput, View } from "react-native";
 
 export default function Login() {
   return (
@@ -25,9 +19,7 @@ export default function Login() {
         </View>
         <View style={styles.formContainer}>
           <TextInput />
-          <TouchableOpacity onPress={() => {}}>
-            <Text style={styles.buttonText}>Entrar</Text>
-          </TouchableOpacity>
+          <GradientButton label="Entrar" onPress={() => {}} />
         </View>
       </View>
     </Page>
@@ -61,10 +53,5 @@ const styles = StyleSheet.create({
   formContainer: {
     width: "100%",
     gap: 16,
-  },
-  buttonText: {
-    fontSize: 18,
-    color: colors.grayscale.white,
-    fontWeight: "bold",
   },
 });
