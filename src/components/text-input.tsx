@@ -1,15 +1,22 @@
+import { useInputFocusAnimation } from "@/animations";
 import { colors } from "@/theme/colors";
 import {
   TextInput as RNTextInput,
   StyleSheet,
   TextInputProps,
 } from "react-native";
+import Animated from "react-native-reanimated";
+
+const AnimatedTextInput = Animated.createAnimatedComponent(RNTextInput);
 
 export function TextInput(textInputProps: TextInputProps) {
+  const { onFocus, onBlur, animatedStyle } = useInputFocusAnimation();
   return (
-    <RNTextInput
+    <AnimatedTextInput
       placeholderTextColor={colors.grayscale.gray300}
-      style={styles.input}
+      style={[styles.input, animatedStyle]}
+      onFocus={onFocus}
+      onBlur={onBlur}
       {...textInputProps}
     />
   );
