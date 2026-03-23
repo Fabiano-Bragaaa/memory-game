@@ -1,7 +1,7 @@
 import { images } from "@/assets";
-import { GradientButton, Page, TextInput } from "@/components";
+import { GradientButton, Page, Text, TextInput } from "@/components";
 import { colors } from "@/theme/colors";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
 import { useLogin } from "./_hooks/use-login";
 
 export default function Login() {

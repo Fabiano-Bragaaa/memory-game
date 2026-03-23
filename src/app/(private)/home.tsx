@@ -1,6 +1,7 @@
+import { Page } from "@/components";
 import { useAuthServices } from "@/services";
 import { router } from "expo-router";
-import { Button, Text, View } from "react-native";
+import { Button, Text } from "react-native";
 
 export default function Home() {
   const { logout } = useAuthServices();
@@ -11,9 +12,9 @@ export default function Home() {
   }
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+    <Page withPadding>
       <Text>Home</Text>
       <Button title="Sair" onPress={handleLogout} />
-    </View>
+    </Page>
   );
 }
