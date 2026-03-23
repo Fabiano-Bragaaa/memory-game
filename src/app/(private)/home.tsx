@@ -1,7 +1,8 @@
 import { Page } from "@/components";
+import { HomeHeader } from "@/containers";
 import { useAuthServices } from "@/services";
 import { router } from "expo-router";
-import { Button, Text } from "react-native";
+import { Button } from "react-native";
 
 export default function Home() {
   const { logout } = useAuthServices();
@@ -13,7 +14,7 @@ export default function Home() {
 
   return (
     <Page withPadding>
-      <Text>Home</Text>
+      <HomeHeader />
       <Button title="Sair" onPress={handleLogout} />
     </Page>
   );
