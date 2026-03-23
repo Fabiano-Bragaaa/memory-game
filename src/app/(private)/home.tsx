@@ -1,11 +1,12 @@
 import { Page } from "@/components";
-import { HomeHeader } from "@/containers";
+import { DifficultySelector, HomeHeader } from "@/containers";
 import { useAuthServices } from "@/services";
 import { router } from "expo-router";
-import { Button } from "react-native";
+import { useDifficulty } from "./_hooks/use-difficulty";
 
 export default function Home() {
   const { logout } = useAuthServices();
+  const { difficulties } = useDifficulty();
 
   function handleLogout() {
     logout();
@@ -15,7 +16,7 @@ export default function Home() {
   return (
     <Page withPadding>
       <HomeHeader />
-      <Button title="Sair" onPress={handleLogout} />
+      <DifficultySelector difficulties={difficulties} />
     </Page>
   );
 }
