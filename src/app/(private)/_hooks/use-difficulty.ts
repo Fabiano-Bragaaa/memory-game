@@ -1,4 +1,5 @@
 import { DifficultyType } from "@/domain";
+import { useState } from "react";
 
 type DifficultyItemType = {
   value: DifficultyType;
@@ -11,6 +12,8 @@ export function useDifficulty() {
     { value: "medium", label: "Medium" },
     { value: "hard", label: "Hard" },
   ];
+  const [selectedDifficulty, setSelectedDifficulty] =
+    useState<DifficultyType>("easy");
 
-  return { difficulties };
+  return { difficulties, selectedDifficulty, setSelectedDifficulty };
 }

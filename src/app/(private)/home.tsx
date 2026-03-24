@@ -6,7 +6,7 @@ import { useDifficulty } from "./_hooks/use-difficulty";
 
 export default function Home() {
   const { logout } = useAuthServices();
-  const { difficulties } = useDifficulty();
+  const { difficulties, selectedDifficulty, setSelectedDifficulty } = useDifficulty();
 
   function handleLogout() {
     logout();
@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <Page withPadding>
       <HomeHeader />
-      <DifficultySelector difficulties={difficulties} />
+      <DifficultySelector difficulties={difficulties} selectedDifficulty={selectedDifficulty} setSelectedDifficulty={setSelectedDifficulty} />
     </Page>
   );
 }
