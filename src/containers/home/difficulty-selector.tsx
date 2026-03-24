@@ -13,9 +13,15 @@ type DifficultyItemType = {
 
 type DifficultySelectorProps = {
   difficulties: DifficultyItemType[];
+  selectedDifficulty: DifficultyType;
+  setSelectedDifficulty: (difficulty: DifficultyType) => void;
 };
 
-export function DifficultySelector({ difficulties }: DifficultySelectorProps) {
+export function DifficultySelector({
+  difficulties,
+  selectedDifficulty,
+  setSelectedDifficulty,
+}: DifficultySelectorProps) {
   return (
     <View style={styles.container}>
       <View style={styles.difficultyContainer}>
@@ -33,11 +39,14 @@ export function DifficultySelector({ difficulties }: DifficultySelectorProps) {
       </View>
       <View style={styles.difficultyTabs}>
         {difficulties.map(difficulty => (
-          <Pressable key={difficulty.value} style={styles.difficultyTab}>
+          <Pressable
+            key={difficulty.value}
+            style={styles.difficultyTab}
+            onPress={() => setSelectedDifficulty(difficulty.value)}>
             <DifficultyIcon
               difficulty={difficulty.value}
               color={getDifficultyColor(difficulty.value)}
-              isSelected
+              isSelected={selectedDifficulty === difficulty.value}
               inactiveColor={colors.grayscale.gray200}
             />
             <Text>{difficulty.label}</Text>
