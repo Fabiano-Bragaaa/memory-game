@@ -1,27 +1,20 @@
+import { useDifficulty } from "@/app/(private)/_hooks/use-difficulty";
 import { Text } from "@/components";
-import { DifficultyType } from "@/domain";
 import { colors } from "@/theme/colors";
-import { getDifficultyColor } from "@/utils";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Pressable, StyleSheet, View } from "react-native";
-import { DifficultyIcon } from "./difficulty-icon";
+import { StyleSheet, View } from "react-native";
+import Animated from "react-native-reanimated";
+import { DifficultyTab } from "./difficulty-tab";
 
-type DifficultyItemType = {
-  value: DifficultyType;
-  label: string;
-};
-
-type DifficultySelectorProps = {
-  difficulties: DifficultyItemType[];
-  selectedDifficulty: DifficultyType;
-  setSelectedDifficulty: (difficulty: DifficultyType) => void;
-};
-
-export function DifficultySelector({
-  difficulties,
-  selectedDifficulty,
-  setSelectedDifficulty,
-}: DifficultySelectorProps) {
+export function DifficultySelector() {
+  const {
+    difficulties,
+    selectedDifficulty,
+    setSelectedDifficulty,
+    animatedIndicatorStyle,
+    indicatorWidth,
+    onTabsLayout,
+  } = useDifficulty();
   return (
     <View style={styles.container}>
       <View style={styles.difficultyContainer}>
@@ -37,20 +30,21 @@ export function DifficultySelector({
           <Text>5 min</Text>
         </View>
       </View>
-      <View style={styles.difficultyTabs}>
+      <View style={styles.difficultyTabs} onLayout={onTabsLayout}>
+        <Animated.View
+          style={[
+            styles.indicator,
+            { width: indicatorWidth },
+            animatedIndicatorStyle,
+          ]}
+        />
         {difficulties.map(difficulty => (
-          <Pressable
+          <DifficultyTab
             key={difficulty.value}
-            style={styles.difficultyTab}
-            onPress={() => setSelectedDifficulty(difficulty.value)}>
-            <DifficultyIcon
-              difficulty={difficulty.value}
-              color={getDifficultyColor(difficulty.value)}
-              isSelected={selectedDifficulty === difficulty.value}
-              inactiveColor={colors.grayscale.gray200}
-            />
-            <Text>{difficulty.label}</Text>
-          </Pressable>
+            difficulty={difficulty}
+            selectedDifficulty={selectedDifficulty}
+            setSelectedDifficulty={setSelectedDifficulty}
+          />
         ))}
       </View>
     </View>
@@ -88,13 +82,15 @@ const styles = StyleSheet.create({
     borderColor: colors.grayscale.gray400,
     borderWidth: 1,
   },
-  difficultyTab: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "center",
-    paddingVertical: 12,
+  indicator: {
+    position: "absolute",
+    top: 4,
+    zIndex: 0,
     borderRadius: 100,
-    gap: 6,
-    zIndex: 1,
+    bottom: 4,
+    left: 4,
+    backgroundColor: colors.grayscale.gray500,
+    borderColor: colors.grayscale.gray400,
+    borderWidth: 1,
   },
 });
